@@ -174,6 +174,7 @@ void enums() {
 }
 
 int main() {
+    enums();
     strings();
     flags();
     approximatelyEquals();
