@@ -184,15 +184,13 @@ void enums() {
 }
 
 // Сначала объявляем структуру Advertising 
-struct Advertising
-{
+struct Advertising {
     int adsShown;
     double clickThroughRatePercentage;
     double averageEarningsPerClick;
 };
  
-void printAdvertising(Advertising ad)
-{
+void printAdvertising(Advertising ad) {
     using namespace std;
     cout << "Number of ads shown: " << ad.adsShown << endl;
     cout << "Click through rate: " << ad.clickThroughRatePercentage << endl;
@@ -250,7 +248,50 @@ void structs() {
     std::cout << "Result of multiply: " << multiply(a, b) << std::endl;
 }
 
+enum class MonsterType {
+    OGRE,
+    GOBLIN,
+    SKELETON,
+    ORC,
+    TROLL
+};
+
+std::string getMonsterTypeString(MonsterType type) {
+    switch (type) {
+    case MonsterType::GOBLIN:
+        return "Goblin";
+    case MonsterType::OGRE:
+        return "Ogre";
+    case MonsterType::SKELETON:
+        return "Goblin";
+    case MonsterType::ORC:
+        return "Orc";
+    case MonsterType::TROLL:
+        return "Troll";
+    default:
+        return "Unknown";
+    }
+}
+
+struct Monster {
+    std::string name;
+    float health;
+    MonsterType type;
+};
+
+void printMonster(Monster monster) {
+    std::cout << "This " << getMonsterTypeString(monster.type) << " is named " << monster.name <<" and has " << monster.health << " health." << std::endl;
+}
+
+void test4() {
+    Monster goblinJohn { "John", 170.0, MonsterType::GOBLIN };
+    Monster orcJames { "James", 35.0, MonsterType::ORC };
+    printMonster(goblinJohn);
+    printMonster(orcJames);
+}
+
 int main() {
+    test4();
     structs();
     enums();
     strings();
