@@ -161,6 +161,18 @@ void strings() {
     std::cout << "You've lived " << static_cast<double>(age) / fullName.length() << " years for each letter in your name.";
 }
 
+enum MonsterType {
+    MONSTER_OGRE,
+    MONSTER_GOBLIN,
+    MONSTER_SKELETON,
+    MONSTER_ORC,
+    MONSTER_TROLL
+};
+
+void enums() {
+    MonsterType monsterType = MONSTER_OGRE;
+}
+
 int main() {
     strings();
     flags();
