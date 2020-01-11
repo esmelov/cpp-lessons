@@ -171,6 +171,19 @@ void enums() {
     };
 
     MonsterType monsterType = MONSTER_OGRE;
+
+    enum class Colors
+    {
+        PINK,
+        GRAY
+    };
+ 
+    Colors color = Colors::PINK;
+ 
+    if (color == Colors::PINK) // это нормально
+        std::cout << "The color is pink!\n";
+    else if (color == Colors::GRAY)
+        std::cout << "The color is gray!\n";
 }
 
 int main() {
