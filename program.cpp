@@ -4,6 +4,12 @@
 #include "constants.h"
 using namespace std;
 
+typedef int status_t;
+status_t editData();
+
+using new_status_t = int;
+new_status_t newEditData();
+
 // Получаем начальную высоту от пользователя и возвращаем её
 double getInitialHeight()
 {
