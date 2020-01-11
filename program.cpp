@@ -150,7 +150,19 @@ void types() {
     std::cout << typeid(a + b).name() << " " << a + b << std::endl; // вычисляем решающий тип данных в выражении a + b
 }
 
+void strings() {
+    std::string fullName;
+    int age;
+
+    std::cout << "Enter your full name: ";    
+    std::getline(std::cin, fullName);    
+    std::cout << "Enter your age: ";
+    std::cin >> age;
+    std::cout << "You've lived " << static_cast<double>(age) / fullName.length() << " years for each letter in your name.";
+}
+
 int main() {
+    strings();
     flags();
     approximatelyEquals();
     types();    
