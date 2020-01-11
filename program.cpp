@@ -11,8 +11,7 @@ using new_status_t = int;
 new_status_t newEditData();
 
 // Получаем начальную высоту от пользователя и возвращаем её
-double getInitialHeight()
-{
+double getInitialHeight() {
     cout << "Enter the height of the tower in meters: ";
     double initialHeight;
     cin >> initialHeight;
@@ -20,8 +19,7 @@ double getInitialHeight()
     return initialHeight;
 }
 
-uint8_t getInitialNumber()
-{
+uint8_t getInitialNumber() {
     int initialNumber;
     while (true) {
         cout << "Enter the number from 0 to 255: ";
@@ -57,8 +55,7 @@ void convertToBinaryAndPrint(uint8_t number) {
 }
 
 // Возвращаем расстояние от земли после "..." секунд падения
-double calculateCurrentHeight(double initialHeight, int seconds)
-{
+double calculateCurrentHeight(double initialHeight, int seconds) {
     // Используем формулу: [ s = u * t + (a * t^2) / 2 ], где u(начальная скорость) = 0
     double distanceFallen = (myConstants::gravity * seconds * seconds) / 2;
     double currentHeight = initialHeight - distanceFallen;
@@ -67,23 +64,20 @@ double calculateCurrentHeight(double initialHeight, int seconds)
 }
 
 // Выводим высоту, на которой находится мячик после каждой секунды падения
-void printHeight(double height, int seconds)
-{
+void printHeight(double height, int seconds) {
     if (height > 0.0)
         cout << "At " << seconds << " seconds, the ball is at height: " << height << " meters\n";
     else
         cout << "At " << seconds << " seconds, the ball is on the ground.\n";
 }
 
-void calculateAndPrintHeight(double initialHeight, int seconds)
-{
+void calculateAndPrintHeight(double initialHeight, int seconds) {
     double height = calculateCurrentHeight(initialHeight, seconds);
     printHeight(height, seconds);
 }
 
 // Примечание: экспонент не должен быть отрицательным
-int pow(int base, int exp)
-{
+int pow(int base, int exp) {
     int result = 1;
     while (exp)
     {
@@ -96,20 +90,17 @@ int pow(int base, int exp)
     return result;
 }
 
-bool isEven(int x)
-{
+bool isEven(int x) {
     return x % 2 == 0;
 }
 
 // Возвращаем true, если разница между a и b в пределах процента эпсилона
-bool approximatelyEqual(double a, double b, double epsilon)
-{
+bool approximatelyEqual(double a, double b, double epsilon) {
     return fabs(a - b) <= ((fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
 }
 
 // Возвращаем true, если разница между a и b меньше absEpsilon или в пределах relEpsilon
-bool approximatelyEqualAbsRel(double a, double b, double absEpsilon, double relEpsilon)
-{
+bool approximatelyEqualAbsRel(double a, double b, double absEpsilon, double relEpsilon) {
     // Проверяем числа на их близость - это нужно в случаях, когда сравниваемые числа являются нулевыми или около нуля
     double diff = fabs(a - b);
     if (diff <= absEpsilon)
@@ -192,7 +183,75 @@ void enums() {
         std::cout << "The color is gray!\n";
 }
 
+// Сначала объявляем структуру Advertising 
+struct Advertising
+{
+    int adsShown;
+    double clickThroughRatePercentage;
+    double averageEarningsPerClick;
+};
+ 
+void printAdvertising(Advertising ad)
+{
+    using namespace std;
+    cout << "Number of ads shown: " << ad.adsShown << endl;
+    cout << "Click through rate: " << ad.clickThroughRatePercentage << endl;
+    cout << "Average earnings per click: $" << ad.averageEarningsPerClick << endl;
+ 
+    // Следующая строка кода разбита из-за своей длины
+    // Мы делим ad.clickThroughRatePercentage на 100, так как пользователь указывает проценты, а не готовое число
+    cout << "Total Earnings: $" <<
+        (ad.adsShown * ad.clickThroughRatePercentage / 100 * ad.averageEarningsPerClick) << endl;
+}
+
+struct FractionalNumber {
+    uint nomerator;
+    uint denominator;
+};
+
+float multiply(FractionalNumber a, FractionalNumber b) {
+    float result;
+    uint n = a.nomerator * b.nomerator;
+    uint d = a.denominator * b.denominator;
+    result = static_cast<float>(n) / d;
+    return result;
+}
+
+FractionalNumber getNumber() {
+    FractionalNumber a;
+    std::cout << "Enter numerator: ";
+    std::cin >> a.nomerator;
+    std::cout << "Enter denominator: ";
+    std::cin >> a.denominator;
+    return a;
+}
+
+void structs() {
+    struct Employee {
+        short id;
+        int age;
+        double salary;
+    };
+    std::cout << "The size of Employee is " << sizeof(Employee) << std::endl;
+
+    Advertising ad;
+ 
+    cout << "How many ads were shown today? ";
+    cin >> ad.adsShown;
+    cout << "What percentage of users clicked on the ads? ";
+    cin >> ad.clickThroughRatePercentage;
+    cout << "What was the average earnings per click? ";
+    cin >> ad.averageEarningsPerClick;
+ 
+    printAdvertising(ad);
+
+    FractionalNumber a = getNumber();
+    FractionalNumber b = getNumber();
+    std::cout << "Result of multiply: " << multiply(a, b) << std::endl;
+}
+
 int main() {
+    structs();
     enums();
     strings();
     flags();
