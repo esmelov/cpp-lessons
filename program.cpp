@@ -28,12 +28,10 @@ uint8_t getInitialNumber() {
         cout << "Enter the number from 0 to 255: ";
         cin >> initialNumber;
         if (initialNumber > 0 && initialNumber < 256)
-            break;
+            return static_cast<uint8_t>(initialNumber);
         else
             cout << "Wrong number." << endl;
-    }   
-
-    return static_cast<uint8_t>(initialNumber);
+    }
 }
 
 void convertToBinaryAndPrint(uint8_t number) {
@@ -365,7 +363,61 @@ void randoms() {
     }
 }
 
+double getValue() {
+    std::cout << "Enter a double value: ";
+    double a;
+    std::cin >> a;
+    std::cin.clear(); // cin в 'обычный' режим работы
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // и удаляем значения предыдущего ввода из входного буфера
+    return a;
+}
+
+char getOperator() {
+    while (true) { // цикл продолжается до тех пор, пока пользователь не введёт корректное значение
+        std::cout << "Enter one of the following: +, -, *, or /: ";
+        char sm;
+        std::cin >> sm;
+ 
+        // Выполняем проверку значений
+        if (sm == '+' || sm == '-' || sm == '*' || sm == '/')    
+            return sm; // возвращаем данные в функцию main() 
+        else // в противном случае, сообщаем пользователю, что что-то пошло не так
+            std::cout << "Oops, that input is invalid.  Please try again." << std::endl;
+    }
+}
+
+void printResult(double a, char sm, double b) {
+    double result;
+    switch (sm) {
+    case '+':
+        result = a + b;
+        break;
+    case '-':
+        result = a - b;
+        break;
+    case '*':
+        result = a * b;
+        break;
+    case '/':
+        result = a / b;
+        break;
+    default:
+        break;
+    }
+
+    std::cout << a << " " << sm << " " << b << " is " << result << std::endl;
+}
+
+void calculator() {
+    double a = getValue();
+    char sm = getOperator();
+    double b = getValue();
+ 
+    printResult(a, sm, b);
+}
+
 int main() {
+    calculator();
     randoms();
     test4();
     structs();
