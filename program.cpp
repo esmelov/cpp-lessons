@@ -1,6 +1,9 @@
 #include <iostream>
 #include <cmath>
 #include <typeinfo>
+#include <cstdlib> // для функций rand() и srand()
+#include <ctime> // для функции time()
+#include <random> // для std::random_device и std::mt19937
 #include "constants.h"
 using namespace std;
 
@@ -290,7 +293,80 @@ void test4() {
     printMonster(orcJames);
 }
 
+unsigned int PRNG() {
+    // Наше стартовое число - 4 541
+    static unsigned int seed = 4541;
+ 
+    // Берём стартовое число и, с его помощью, генерируем новое значение
+    // Из-за использования очень больших чисел (и переполнения) угадать следующее число исходя из предыдущего - очень сложно
+    seed = (8253729 * seed + 2396403);
+ 
+    // Берём стартовое число и возвращаем значение в диапазоне от 0 до 32 767
+    return seed  % 32768;
+}
+
+// Генерируем рандомное число между значениями min и max
+// Предполагается, что функцию srand() уже вызывали
+int getRandomNumber(int min, int max) {
+    static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0); 
+    // Равномерно распределяем рандомное число в нашем диапазоне
+    return static_cast<int>(rand() * fraction * (max - min + 1) + min);
+}
+
+void randoms() {
+    std::cout << "Custom random with start number 4541" << std::endl;
+    // Выводим 100 случайных чисел
+    for (int count=0; count < 100; ++count) {
+        std::cout << PRNG() << "    ";
+ 
+        // Если вывели 5 чисел, то вставляем символ новой строки
+        if ((count+1) % 5 == 0)
+            std::cout << std::endl;
+	}
+
+    std::cout << "Standart random with start number 4541" << std::endl;
+    srand(4541); // устанавливаем стартовое значение - 4 541
+    // Выводим 100 случайных чисел
+    for (int count=0; count < 100; ++count) {
+        std::cout << rand() << "    ";
+ 
+        // Если вывели 5 чисел, то вставляем символ новой строки
+        if ((count+1) % 5 == 0)
+            std::cout << std::endl;
+	}
+
+    std::cout << "Standart random with start number use current seconds" << std::endl;
+    srand(static_cast<unsigned int>(time(0))); // устанавливаем значение системных часов в качестве стартового числа 
+    for (int count=0; count < 100; ++count)
+    {
+        std::cout << rand() << "    ";
+ 
+        // Если вывели 5 чисел, то вставляем символ новой строки
+        if ((count+1) % 5 == 0)
+            std::cout << std::endl;
+	}
+
+    auto rnd = getRandomNumber(1, 6);
+
+    std::cout << "Mersenne Twister" << std::endl;
+    std::random_device rd; 
+    std::mt19937 mersenne(rd()); // инициализируем Вихрь Мерсенна(считается лучшим, но не криптостойким) случайным стартовым числом 
+ 
+    // Примечание: Из-за одного бага в компиляторе Code::Blocks (если вы используете Code::Blocks в Windows) - удалите две строчки кода выше и раскомментируйте следующую строчку:
+    // std::mt19937 mersenne(static_cast<unsigned int>(time(0))); // инициализируем Вихрь Мерсенна случайным стартовым числом
+ 
+    // Выводим несколько случайных чисел
+    for (int count = 0; count < 48; ++count) {
+        std::cout << mersenne() << "    ";
+ 
+        // Если вывели 5 чисел, то вставляем символ новой строки
+        if ((count + 1) % 5 == 0)
+            std::cout << std::endl;
+    }
+}
+
 int main() {
+    randoms();
     test4();
     structs();
     enums();
