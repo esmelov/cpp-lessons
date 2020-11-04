@@ -6,5 +6,6 @@ void print(std::string);
 void printLn(std::string);
 double getNumber();
 int getIntNumber();
+uint getUIntNumber();
 
 #endif

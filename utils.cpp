@@ -19,3 +19,9 @@ int getIntNumber() {
     std::cin >> a;
     return a;
 }
+
+uint getUIntNumber() {
+    uint a;
+    std::cin >> a;
+    return a;
+}

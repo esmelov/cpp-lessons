@@ -4,7 +4,9 @@
 //#include "./finalTestCh2/freeFall.h"
 //#include "./chapter3/lesson39/evenNumber.h"
 //#include "./ravesli.h"
-#include "./chapter3/lesson42/comparison.h"
+//#include "./chapter3/lesson42/comparison.h"
+#include "./chapter3/lesson44/binary.h"
+
 
 int main() {
     //argumentsAndParameters();
@@ -16,7 +18,9 @@ int main() {
     //startFreeFall();
     //check();
 
-    compare();
+    //compare();
+
+    convertToBinary();
 
     //int bin = 0b1011'0010; // присваиваем переменной бинарный литерал 1011 0010 
     //long value = 2'532'673'462; // намного проще читать, нежели 2532673462
