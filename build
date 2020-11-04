@@ -1,0 +1,1 @@
+g++ *.cpp *.h -o ./bin/output
